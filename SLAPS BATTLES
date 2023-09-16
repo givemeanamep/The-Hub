@@ -1,0 +1,364 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "The Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+wait(.5)
+local loop = false
+
+local Tab1 = Window:MakeTab({
+	Name = "Combat",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab1:AddSection({
+	Name = "Combat"
+})
+
+--[[
+Name = <string> - The name of the tab.
+Icon = <string> - The icon of the tab.
+PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
+]]
+local Tab2 = Window:MakeTab({
+	Name = "Antis",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+--[[
+Name = <string> - The name of the tab.
+Icon = <string> - The icon of the tab.
+PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
+]]
+local Tab3 = Window:MakeTab({
+	Name = "Misc",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+local Tab4 = Window:MakeTab({
+	Name = "Guis",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+local Badge = Tab3:AddSection({
+	Name = "Badges Helper"
+})
+local Autofarms = Tab3:AddSection({
+	Name = "Auto Farm"
+})
+local Helpfuls = Tab3:AddSection({
+	Name = "Helpfuls"
+})
+local bobBoss = Tab3:AddSection({
+	Name = "Eternal BOB ver"
+})
+Tab2:AddButton({
+	Name = "Anti Ragdoll",
+	Callback = function()
+game.Players.LocalPlayer.Character.Humanoid.Health = 0
+game.Players.LocalPlayer.CharacterAdded:Connect(function()
+game.Players.LocalPlayer.Character:WaitForChild("Ragdolled").Changed:Connect(function()
+if game.Players.LocalPlayer.Character:WaitForChild("Ragdolled").Value == true then
+repeat task.wait() game.Players.LocalPlayer.Character.Torso.Anchored = true
+until game.Players.LocalPlayer.Character:WaitForChild("Ragdolled").Value == false
+game.Players.LocalPlayer.Character.Torso.Anchored = false
+end
+end)
+end)
+end
+	
+})
+
+Tab1:AddToggle({
+	Name = "Slap Aura",
+	Default = false,
+	Callback = function(SAura)
+	  SAuras = SAura
+		while SAuras == true do
+for i,v in pairs(game.Players:GetChildren()) do
+                    if v ~= game.Players.LocalPlayer and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and v.Character then
+if v.Character:FindFirstChild("entered") and v.Character:FindFirstChild("HumanoidRootPart") then
+Magnitude = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Character.HumanoidRootPart.Position).Magnitude
+                        if 25 >= Magnitude then
+game.ReplicatedStorage.b:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+                    end
+end
+end
+                end
+task.wait()
+end
+end
+})
+
+--[[
+Name = <string> - The name of the toggle.
+Default = <bool> - The default value of the toggle.
+Callback = <function> - The function of the toggle.
+]]
+
+Tab2:AddButton({
+	Name = "Anti Pusher",
+	Callback = function()
+      		while true do
+for i,v in pairs(game.Workspace:GetChildren()) do
+                    if v.Name == "wall" then
+                        v.CanCollide = false
+                    end
+end
+task.wait()
+end
+	end
+  	
+})
+Tab2:AddButton({
+	Name = "Anti Reaper",
+	Callback = function()
+      		while loop == false do
+for i,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+                    if v.Name == "DeathMark" then
+                        game:GetService("ReplicatedStorage").ReaperGone:FireServer(v) wait()
+                    game:GetService("Lighting"):WaitForChild("DeathMarkColorCorrection"):Destroy() 
+                    end
+                
+task.wait()
+end
+  	end    end
+  
+})
+Tab2:AddButton({
+	Name = "Anti Stun, Brick, Megarock",
+	Callback = function()
+	 AntiStun = Value
+while loop == false do
+if game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") ~= nil and game.Workspace:FindFirstChild("Shockwave") then
+game.Players.LocalPlayer.Character.Humanoid.PlatformStand = false
+end
+task.wait()
+end
+                    
+  while loop == false do
+for i,v in pairs(game.Workspace:GetChildren()) do
+                    if v.Name == "Union" then
+                        v.CanTouch = false
+                    end
+                end
+task.wait()
+end
+                    
+  
+while loop == false do
+for i,v in pairs(game.Workspace:GetDescendants()) do
+                    if v.Name == "rock" then
+                        v.CanTouch = false
+                        v.CanQuery = false
+                    end
+                end
+task.wait()
+end
+                    end
+	
+  
+})
+Tab2:AddButton({
+	Name = "Anti Void",
+	Callback = function()
+      local TournamentAntiVoid = Instance.new("Part", workspace)
+TournamentAntiVoid.Name = "TAntiVoid"
+TournamentAntiVoid.Size = Vector3.new(2048, 15, 2048)
+TournamentAntiVoid.Position = Vector3.new(3420, 70, 3)
+TournamentAntiVoid.CanCollide = false
+TournamentAntiVoid.Transparency = 1
+TournamentAntiVoid.Anchored = true
+	  
+	  local antivoid = Instance.new('Part')
+	  antivoid.Position = Vector3.new(-9.55 , -12.87 , 1.84)
+	  antivoid.Size = Vector3.new(10000,1,10000)
+	  antivoid.Anchored = true
+	  antivoid.Parent = workspace
+	  antivoid.Transparency = 0.8
+	  
+  	end    
+})
+Helpfuls:AddButton({
+	Name = "Tycoon Auto Press",
+	Callback = function()
+      		AutoTycoon = false
+    for i,v in pairs(workspace:GetDescendants()) do
+        if v.Name == "End" and v.ClassName == "Part" then
+            v.Size = Vector3.new(28, 0.3, 4)
+        end
+    end
+while true do
+    for i,v in pairs(workspace:GetDescendants()) do
+        if v.Name == "Click" and v:FindFirstChild("ClickDetector") then
+            fireclickdetector(v.ClickDetector)
+        end
+    end
+    task.wait()
+end
+
+	end
+})
+
+
+
+Tab1:AddToggle({
+	Name = "Auto Enter Arena",
+	Default = false,
+	Callback = function(Arena)
+	  Arenas = Arena
+		       while Arenas do
+if game.Players.LocalPlayer.Character:FindFirstChild("entered") == nil and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("Head"), workspace.Lobby.Teleport1, 0)
+firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("Head"), workspace.Lobby.Teleport1, 1)
+    end
+task.wait() end
+	end    
+})
+
+--[[
+Name = <string> - The name of the toggle.
+Default = <bool> - The default value of the toggle.
+Callback = <function> - The function of the toggle.
+]]
+
+
+
+Autofarms:AddButton({
+	Name = "Slapple Farm",
+	Callback = function()
+      		while loop == false do
+for i, v in ipairs(workspace.Arena.island5.Slapples:GetDescendants()) do
+                if game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and game.Players.LocalPlayer.Character:FindFirstChild("entered") and v.Name == "Glove" and v:FindFirstChildWhichIsA("TouchTransmitter") then
+                    firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v, 0)
+        firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v, 1)
+                end
+            end
+task.wait()
+end
+end
+  
+})
+Tab4:AddButton({
+	Name = "Destroy Gui",
+	Callback = function()
+      		Window:Destroy()
+  	end    
+})
+Tab1:AddToggle({
+	Name = "RAHHHHHHHHH",
+	Default = false,
+	Callback = function(rah)
+	  rahs = rah
+		while rahs do
+game:GetService("ReplicatedStorage").rhythmevent:FireServer("AoeExplosion",0)
+task.wait()
+end
+                    end
+})
+Badge:AddButton({
+	Name = "Bob Farm",
+	Callback = function()
+      		loadstring(game:HttpGet("https://raw.githubusercontent.com/thanhdat4461/BaconScripterLua/main/Slap%20Battles%20Bob%20Fram.lua"))()
+  	end    
+})
+Helpfuls:AddToggle({
+	Name = "Infinite Reverse",
+	Default = false,
+	Callback = function(Value)
+	  Re = Value 
+	  while Re do
+	    wait(6.5)
+		game:GetService("ReplicatedStorage"):WaitForChild("ReverseAbility"):FireServer()
+	  end
+	end    
+})
+bobBoss:AddButton({
+	Name = "Auto Hit bob And Minions",
+	Callback = function()
+      		game.ReplicatedStorage.b:FireServer(workspace.bobClone)
+	        game.ReplicatedStorage.b:FireServer(workspace.bobBoss)
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
+--[[
+Name = <string> - The name of the toggle.
+Default = <bool> - The default value of the toggle.
+Callback = <function> - The function of the toggle.
+]]
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
+--[[
+Name = <string> - The name of the toggle.
+Default = <bool> - The default value of the toggle.
+Callback = <function> - The function of the toggle.
+]]
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
+
+
+--[[
+Name = <string> - The name of the toggle.
+Default = <bool> - The default value of the toggle.
+Callback = <function> - The function of the toggle.
+]]
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
+--[[
+Name = <string> - The name of the toggle.
+Default = <bool> - The default value of the toggle.
+Callback = <function> - The function of the toggle.
+]]
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
