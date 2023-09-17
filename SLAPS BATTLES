@@ -1,7 +1,25 @@
+
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 local Window = OrionLib:MakeWindow({Name = "The Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
 wait(.5)
 local loop = false
+
+local TournamentAntiVoid = Instance.new("Part", workspace)
+TournamentAntiVoid.Name = "TAntiVoid"
+TournamentAntiVoid.Size = Vector3.new(2048, 15, 2048)
+TournamentAntiVoid.Position = Vector3.new(3420, 70, 3)
+TournamentAntiVoid.CanCollide = true
+TournamentAntiVoid.Transparency = 1
+TournamentAntiVoid.Anchored = true
+	  
+	  local antivoid = Instance.new('Part')
+	  antivoid.Position = Vector3.new(-9.55 , -12.87 , 1.84)
+	  antivoid.Size = Vector3.new(10000,1,10000)
+	  antivoid.Anchored = true
+	  antivoid.Parent = workspace
+	  antivoid.Transparency = 0.8
+   antivoid.CanCollide = true
+	  
 
 local Tab1 = Window:MakeTab({
 	Name = "Combat",
@@ -50,9 +68,10 @@ local Helpfuls = Tab3:AddSection({
 local bobBoss = Tab3:AddSection({
 	Name = "Eternal BOB ver"
 })
-Tab2:AddButton({
-	Name = "Anti Ragdoll",
-	Callback = function()
+Tab2:AddToggle({
+	Name = "Anti Ragdoll", Default = false,
+	Callback = function(antiR)
+	  antiRagdoll = antiR
 game.Players.LocalPlayer.Character.Humanoid.Health = 0
 game.Players.LocalPlayer.CharacterAdded:Connect(function()
 game.Players.LocalPlayer.Character:WaitForChild("Ragdolled").Changed:Connect(function()
@@ -94,10 +113,12 @@ Default = <bool> - The default value of the toggle.
 Callback = <function> - The function of the toggle.
 ]]
 
-Tab2:AddButton({
+Tab2:AddToggle({
 	Name = "Anti Pusher",
-	Callback = function()
-      		while true do
+  Default = false,
+	Callback = function(pusher)
+	  pushers == pusher
+      		while reapers do
 for i,v in pairs(game.Workspace:GetChildren()) do
                     if v.Name == "wall" then
                         v.CanCollide = false
@@ -108,13 +129,21 @@ end
 	end
   	
 })
-Tab2:AddButton({
+Tab2:AddToggle({
 	Name = "Anti Reaper",
-	Callback = function()
-      		while loop == false do
+  Default = false,
+	Callback = function(reaper)
+	  reapers = reaper
+      		while reapers do
+      		  
 for i,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
-                    if v.Name == "DeathMark" then
-                        game:GetService("ReplicatedStorage").ReaperGone:FireServer(v) wait()
+                    local args = {
+    [1] = getNil("DeathMark", "StringValue")
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("ReaperGone"):FireServer(unpack(args))
+ 
+  wait()
                     game:GetService("Lighting"):WaitForChild("DeathMarkColorCorrection"):Destroy() 
                     end
                 
@@ -123,18 +152,18 @@ end
   	end    end
   
 })
-Tab2:AddButton({
+Tab2:AddToggle({
 	Name = "Anti Stun, Brick, Megarock",
-	Callback = function()
-	 AntiStun = Value
-while loop == false do
+	Callback = function(manies)
+	 many= manies
+while many do
 if game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") ~= nil and game.Workspace:FindFirstChild("Shockwave") then
 game.Players.LocalPlayer.Character.Humanoid.PlatformStand = false
 end
 task.wait()
 end
                     
-  while loop == false do
+  while many do
 for i,v in pairs(game.Workspace:GetChildren()) do
                     if v.Name == "Union" then
                         v.CanTouch = false
@@ -144,7 +173,7 @@ task.wait()
 end
                     
   
-while loop == false do
+while many do
 for i,v in pairs(game.Workspace:GetDescendants()) do
                     if v.Name == "rock" then
                         v.CanTouch = false
@@ -157,36 +186,24 @@ end
 	
   
 })
-Tab2:AddButton({
+Tab2:AddToggle({
 	Name = "Anti Void",
-	Callback = function()
-      local TournamentAntiVoid = Instance.new("Part", workspace)
-TournamentAntiVoid.Name = "TAntiVoid"
-TournamentAntiVoid.Size = Vector3.new(2048, 15, 2048)
-TournamentAntiVoid.Position = Vector3.new(3420, 70, 3)
-TournamentAntiVoid.CanCollide = false
-TournamentAntiVoid.Transparency = 1
-TournamentAntiVoid.Anchored = true
-	  
-	  local antivoid = Instance.new('Part')
-	  antivoid.Position = Vector3.new(-9.55 , -12.87 , 1.84)
-	  antivoid.Size = Vector3.new(10000,1,10000)
-	  antivoid.Anchored = true
-	  antivoid.Parent = workspace
-	  antivoid.Transparency = 0.8
-	  
+  Default = false,
+	Callback = function(void)
+	    TournamentAntiVoid.CanCollide = void
+	    antivoid.CanCollide = void
   	end    
 })
-Helpfuls:AddButton({
-	Name = "Tycoon Auto Press",
-	Callback = function()
-      		AutoTycoon = false
+Helpfuls:AddToggle({
+	Name = "Tycoon Auto Press", Default = false
+	Callback = function(atycoon)
+      		AutoTycoon = atycoon
     for i,v in pairs(workspace:GetDescendants()) do
         if v.Name == "End" and v.ClassName == "Part" then
             v.Size = Vector3.new(28, 0.3, 4)
         end
     end
-while true do
+while AutoTycoon do
     for i,v in pairs(workspace:GetDescendants()) do
         if v.Name == "Click" and v:FindFirstChild("ClickDetector") then
             fireclickdetector(v.ClickDetector)
@@ -223,9 +240,10 @@ Callback = <function> - The function of the toggle.
 
 
 Autofarms:AddButton({
-	Name = "Slapple Farm",
-	Callback = function()
-      		while loop == false do
+	Name = "Slapple Farm", Default = false,
+	Callback = function(slapple)
+	  slapples = slapple
+      		while slapples do
 for i, v in ipairs(workspace.Arena.island5.Slapples:GetDescendants()) do
                 if game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and game.Players.LocalPlayer.Character:FindFirstChild("entered") and v.Name == "Glove" and v:FindFirstChildWhichIsA("TouchTransmitter") then
                     firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v, 0)
@@ -366,7 +384,8 @@ Helpfuls:AddButton({
 	Callback = function()
 game:GetService("ReplicatedStorage").Goldify:FireServer(true)
                     end    
-                })Tab3:AddToggle({
+                })
+Tab2:AddToggle({
                     Name = "Anti Admins",
                     Default = false,
                     Callback = function(bool)
