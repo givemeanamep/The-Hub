@@ -116,7 +116,7 @@ Tab2:AddToggle({
 	Name = "Anti Pusher",
   Default = false,
 	Callback = function(pusher)
-	  pushers == pusher
+	  pushers = pusher
       		while reapers do
 for i,v in pairs(game.Workspace:GetChildren()) do
                     if v.Name == "wall" then
