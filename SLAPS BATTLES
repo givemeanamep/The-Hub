@@ -12,7 +12,11 @@ local Tab1 = Window:MakeTab({
 local Section = Tab1:AddSection({
 	Name = "Combat"
 })
-
+local Tab3 = Window:MakeTab({
+	Name = "Main Scripts",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
 --[[
 Name = <string> - The name of the tab.
 Icon = <string> - The icon of the tab.
@@ -29,11 +33,6 @@ Name = <string> - The name of the tab.
 Icon = <string> - The icon of the tab.
 PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
 ]]
-local Tab3 = Window:MakeTab({
-	Name = "Misc",
-	Icon = "rbxassetid://4483345998",
-	PremiumOnly = false
-})
 local Tab4 = Window:MakeTab({
 	Name = "Guis",
 	Icon = "rbxassetid://4483345998",
@@ -241,7 +240,7 @@ end
 Tab4:AddButton({
 	Name = "Destroy Gui",
 	Callback = function()
-      		Window:Destroy()
+      		OrionLib:Destroy()
   	end    
 })
 Tab1:AddToggle({
@@ -279,7 +278,221 @@ bobBoss:AddButton({
 	        game.ReplicatedStorage.b:FireServer(workspace.bobBoss)
   	end    
 })
+Badge:AddButton({
+                    Name = "Get Kinetic (Report Risk)",
+Callback = function()
+if game.Players.LocalPlayer.leaderstats.Glove.Value == "Stun" then
+OGL = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+for i = 1,100 do
+game.ReplicatedStorage.SelfKnockback:FireServer({["Force"] = 0,["Direction"] = Vector3.new(0,0.01,0)})
+wait(0.05)
+end
+wait(1.5)
+repeat
+local players = game.Players:GetChildren()
+local RandomPlayer = players[math.random(1, #players)]
+repeat RandomPlayer = players[math.random(1, #players)] until RandomPlayer ~= game.Players.LocalPlayer
+repeat RandomPlayer = players[math.random(1, #players)] until RandomPlayer.Character:FindFirstChild("entered") and RandomPlayer.Character:FindFirstChild("rock") == nil and RandomPlayer.Character.Head:FindFirstChild("UnoReverseCard") == nil
+Target = RandomPlayer
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Target.Character.HumanoidRootPart.CFrame * CFrame.new(0,-20,0)
+wait(0.25)
+game.ReplicatedStorage.StunR:FireServer(game.Players.LocalPlayer.Character.Stun)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = OGL
+wait(9.9)
+until game.Players.LocalPlayer.Character:FindFirstChild("EMPStunBadgeCounter") and game.Players.LocalPlayer.Character.EMPStunBadgeCounter.Value >= 50
+else
+game.StarterGui:SetCore("SendNotification", {Title = "Error",Duration = 5,Text = "You don't have Stun equipped"})
+end
+end
+                    })
 
+Badge:AddToggle({
+	Name = "Phase Farm",
+	Default = false,
+	Callback = function(Value)
+Phasefarm = Value
+while Phasefarm do
+for i,v in pairs(game.Workspacey:GetChildren()) do
+                    if v.Name == "PhaseOrb" and v:FindFirstChild("TouchInterest") then
+firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("Head"), v, 0)
+firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("Head"), v, 1)
+                    end
+                end
+task.wait()
+end
+	end    
+})
+
+Badge:AddButton({
+	Name = "Get Trap",
+	Callback = function()
+if game.Players.LocalPlayer.leaderstats.Glove.Value == "Brick" then
+for i = 1, 200 do
+game:GetService("ReplicatedStorage").lbrick:FireServer()
+game.Players.LocalPlayer.PlayerGui.BRICKCOUNT.ImageLabel.TextLabel.Text = game.Players.LocalPlayer.PlayerGui.BRICKCOUNT.ImageLabel.TextLabel.Text + 1;
+wait(Random.new():NextNumber(1.1,1.4))
+game:GetService("ReplicatedStorage").lbrick:FireServer()
+game.Players.LocalPlayer.PlayerGui.BRICKCOUNT.ImageLabel.TextLabel.Text = game.Players.LocalPlayer.PlayerGui.BRICKCOUNT.ImageLabel.TextLabel.Text + 1;
+wait(Random.new():NextNumber(1.1,1.4))
+game:GetService("ReplicatedStorage").lbrick:FireServer()
+game.Players.LocalPlayer.PlayerGui.BRICKCOUNT.ImageLabel.TextLabel.Text = game.Players.LocalPlayer.PlayerGui.BRICKCOUNT.ImageLabel.TextLabel.Text + 1;
+wait(Random.new():NextNumber(1.1,1.4))
+game:GetService("ReplicatedStorage").lbrick:FireServer()
+game.Players.LocalPlayer.PlayerGui.BRICKCOUNT.ImageLabel.TextLabel.Text = game.Players.LocalPlayer.PlayerGui.BRICKCOUNT.ImageLabel.TextLabel.Text + 1;
+wait(Random.new():NextNumber(1.1,1.4))
+game:GetService('VirtualInputManager'):SendKeyEvent(true,'E',false,x)
+wait(Random.new():NextNumber(1.1,1.4))
+end
+else
+game.StarterGui:SetCore("SendNotification", {Title = "Error",Duration = 5,Text = "You don't have Brick equipped"})
+end
+                    end    
+                })
+Helpfuls:AddButton({
+	Name = "Destroy all tycoons",
+	Callback = function()
+for i = 1, 110 do
+ for i,v in pairs(workspace:GetDescendants()) do
+        if v.Name == "Destruct" and v:FindFirstChild("ClickDetector") then
+            fireclickdetector(v.ClickDetector)
+        end
+    end
+task.wait()
+end
+                    end    
+                })
+Helpfuls:AddButton({
+	Name = "Infinite Golden (Use in arena)",
+	Callback = function()
+game:GetService("ReplicatedStorage").Goldify:FireServer(true)
+                    end    
+                })Tab3:AddToggle({
+                    Name = "Anti Admins",
+                    Default = false,
+                    Callback = function(bool)
+AntiAdmins = Value
+while AntiAdmins do
+for i,v in pairs(game.Players:GetChildren()) do
+                    if v:GetRankInGroup(9950771) >= 2 then
+                        game.Players.LocalPlayer:Kick("High Rank Player Detected.".." ("..v.Name..")")
+                        break
+                    end
+                end
+task.wait()
+end
+end
+})
+Tab2:AddToggle({
+                    Name = "Anti Kick",
+                    Default = false,
+                    Callback = function(Value)
+AntiKick = Value
+while AntiKick do
+for i,v in pairs(game.CoreGui.RobloxPromptGui.promptOverlay:GetDescendants()) do
+                    if v.Name == "ErrorPrompt" then
+game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, game.Players.LocalPlayer)
+                    end
+                end
+task.wait()
+end
+end
+})
+Tab2:AddToggle({
+                    Name = "Anti Squid",
+                    Default = false,
+                    Callback = function(Value)
+AntiSquid = Value
+if AntiSquid == false then
+        game.Players.LocalPlayer.PlayerGui.SquidInk.Enabled = true
+        end
+while AntiSquid do
+if game.Players.LocalPlayer.PlayerGui:FindFirstChild("SquidInk") then
+        game.Players.LocalPlayer.PlayerGui.SquidInk.Enabled = false
+end
+task.wait()
+end
+                    end    
+                })
+
+               Tab2:AddToggle({
+                    Name = "Anti Hallow Jack",
+                    Default = false,
+                    Callback = function(Value)
+game.Players.LocalPlayer.PlayerScripts.HallowJackAbilities.Disabled = Value
+                    end    
+                })
+
+               Tab2:AddToggle({
+                    Name = "Anti Conveyor",
+                    Default = false,
+                    Callback = function(Value)
+game.Players.LocalPlayer.PlayerScripts.ConveyorVictimized.Disabled = Value
+                    end    
+                })
+
+               Tab2:AddToggle({
+                    Name = "Anti Brick",
+                    Default = false,
+                    Callback = function(Value)
+AntiBrick = Value
+while AntiBrick do
+for i,v in pairs(game.Workspace:GetChildren()) do
+                    if v.Name == "Union" then
+                        v.CanTouch = false
+                    end
+                end
+task.wait()
+end
+                    end    
+                })
+
+               Tab2:AddToggle({
+                    Name = "Anti Null",
+                    Default = false,
+                    Callback = function(Value)
+AntiNull = Value
+while AntiNull do
+for i,v in pairs(game.Workspace:GetChildren()) do
+                    if v.Name == "Imp" and v:FindFirstChild("Body") then
+shared.gloveHits[game.Players.LocalPlayer.leaderstats.Glove.Value]:FireServer(v.Body,true)
+end
+end
+task.wait()
+end
+                    end    
+                })
+
+               Tab2:AddToggle({
+                    Name = "Anti [REDACTED]",
+                    Default = false,
+                    Callback = function(Value)
+game.Players.LocalPlayer.PlayerScripts.Well.Disabled = Value
+                    end    
+                })
+
+               Tab2:AddToggle({
+                    Name = "Anti Za Hando",
+                    Default = false,
+                    Callback = function(Value)
+AntiZaHando = Value
+            while AntiZaHando do
+                for i,v in pairs(game.Workspace:GetChildren()) do
+                    if v.ClassName == "Part" and v.Name == "Part" then
+                        v:Destroy()
+                    end
+                end
+task.wait()
+            end
+                    end    
+                })
+Badge:AddButton({
+	Name = "Get Tycoon",
+	Callback = function()
+      		repeat task.wait()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.Arena.Plate.CFrame 
+until game.Players.LocalPlayer.PlayerGui.PlateIndicator.TextLabel.Text == "Plate Counter: 600"
+                    end    
+                })
 --[[
 Name = <string> - The name of the button.
 Callback = <function> - The function of the button.
