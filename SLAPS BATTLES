@@ -101,10 +101,9 @@ for i,v in pairs(game.Players:GetChildren()) do
 if v.Character:FindFirstChild("entered") and v.Character:FindFirstChild("HumanoidRootPart") then
 Magnitude = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Character.HumanoidRootPart.Position).Magnitude
                         if 25 >= Magnitude then
-game.ReplicatedStorage.b:FireServer(v.Character:WaitForChild("HumanoidRootPart")
-game.ReplicatedStorage.b:FireServer(v.Character:WaitForChild("HumanoidRootPart")
+game.ReplicatedStorage.b:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
 
-game:GetService("ReplicatedStorage"):WaitForChild("KSHit"):FireServer(v.Character:WaitForChild("HumanoidRootPart")
+game:GetService("ReplicatedStorage"):WaitForChild("KSHit"):FireServer(v.Character:WaitForChild("HumanoidRootPart"))
 
                     end
 end
