@@ -16,8 +16,9 @@ TournamentAntiVoid.Anchored = true
 	  antivoid.Size = Vector3.new(10000,1,10000)
 	  antivoid.Anchored = true
 	  antivoid.Parent = workspace
-	  antivoid.Transparency = 0.8
+	  antivoid.Transparency = 1
    antivoid.CanCollide = true
+antivoid.Name = 'aVoid'
 	  
 
 local Tab1 = Window:MakeTab({
@@ -68,13 +69,17 @@ local bobBoss = Tab3:AddSection({
 	Name = "Eternal BOB ver"
 })
 Tab2:AddToggle({
-	Name = "Anti Ragdoll", Default = false,
-	Callback = function(antiR)
-	  antiRagdoll = antiR
+                    Name = "Anti Ragdoll",
+                    Default = false,
+                    Callback = function(Value)
+AntiRagdoll = Value
+                      while AntiRagdoll do
+wait()
+                        if AntiRagdoll then
 game.Players.LocalPlayer.Character.Humanoid.Health = 0
 game.Players.LocalPlayer.CharacterAdded:Connect(function()
 game.Players.LocalPlayer.Character:WaitForChild("Ragdolled").Changed:Connect(function()
-if game.Players.LocalPlayer.Character:WaitForChild("Ragdolled").Value == true then
+if game.Players.LocalPlayer.Character:WaitForChild("Ragdolled").Value == true and AntiRagdoll then
 repeat task.wait() game.Players.LocalPlayer.Character.Torso.Anchored = true
 until game.Players.LocalPlayer.Character:WaitForChild("Ragdolled").Value == false
 game.Players.LocalPlayer.Character.Torso.Anchored = false
@@ -82,21 +87,25 @@ end
 end)
 end)
 end
-	
-})
+                    end    end
+                })
 
 Tab1:AddToggle({
 	Name = "Slap Aura",
 	Default = false,
 	Callback = function(SAura)
 	  SAuras = SAura
-		while SAuras == true do
+		while SAuras do
 for i,v in pairs(game.Players:GetChildren()) do
                     if v ~= game.Players.LocalPlayer and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and v.Character then
 if v.Character:FindFirstChild("entered") and v.Character:FindFirstChild("HumanoidRootPart") then
 Magnitude = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Character.HumanoidRootPart.Position).Magnitude
                         if 25 >= Magnitude then
-game.ReplicatedStorage.b:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+game.ReplicatedStorage.b:FireServer(v.Character:WaitForChild("HumanoidRootPart")
+game.ReplicatedStorage.b:FireServer(v.Character:WaitForChild("HumanoidRootPart")
+
+game:GetService("ReplicatedStorage"):WaitForChild("KSHit"):FireServer(v.Character:WaitForChild("HumanoidRootPart")
+
                     end
 end
 end
@@ -117,7 +126,7 @@ Tab2:AddToggle({
   Default = false,
 	Callback = function(pusher)
 	  pushers = pusher
-      		while reapers do
+      		while pushers do
 for i,v in pairs(game.Workspace:GetChildren()) do
                     if v.Name == "wall" then
                         v.CanCollide = false
@@ -133,28 +142,25 @@ Tab2:AddToggle({
   Default = false,
 	Callback = function(reaper)
 	  reapers = reaper
-      		while reapers do
-      		  
-for i,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
-                    local args = {
-    [1] = getNil("DeathMark", "StringValue")
-}
-
-game:GetService("ReplicatedStorage"):WaitForChild("ReaperGone"):FireServer(unpack(args))
- 
-  wait()
-                    game:GetService("Lighting"):WaitForChild("DeathMarkColorCorrection"):Destroy() 
+	  if reaper == true then
+                while reapers do
+                    wait(.001)
+                    for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+                        if v.Name == "DeathMark" then
+                            game:GetService("ReplicatedStorage").ReaperGone:FireServer(game:GetService("Players").LocalPlayer.Character.DeathMark)
+                            game:GetService("Lighting"):WaitForChild("DeathMarkColorCorrection"):Destroy()
+                        end 
                     end
-                
-task.wait()
-end
-  	end    end
+                end
+  	end   
+	end
   
 })
 Tab2:AddToggle({
 	Name = "Anti Stun, Brick, Megarock",
 	Callback = function(manies)
-	 many= manies
+	 many = manies
+	  if manies == true then
 while many do
 if game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") ~= nil and game.Workspace:FindFirstChild("Shockwave") then
 game.Players.LocalPlayer.Character.Humanoid.PlatformStand = false
@@ -182,7 +188,7 @@ for i,v in pairs(game.Workspace:GetDescendants()) do
 task.wait()
 end
                     end
-	
+	end
   
 })
 Tab2:AddToggle({
@@ -191,10 +197,11 @@ Tab2:AddToggle({
 	Callback = function(void)
 	    TournamentAntiVoid.CanCollide = void
 	    antivoid.CanCollide = void
-  	end    
+	  end
 })
 Helpfuls:AddToggle({
-	Name = "Tycoon Auto Press", Default = false
+	Name = "Tycoon Auto Press",
+  Default = false,
 	Callback = function(atycoon)
       		AutoTycoon = atycoon
     for i,v in pairs(workspace:GetDescendants()) do
@@ -202,7 +209,7 @@ Helpfuls:AddToggle({
             v.Size = Vector3.new(28, 0.3, 4)
         end
     end
-while AutoTycoon do
+while atycoon == true do
     for i,v in pairs(workspace:GetDescendants()) do
         if v.Name == "Click" and v:FindFirstChild("ClickDetector") then
             fireclickdetector(v.ClickDetector)
@@ -242,7 +249,7 @@ Autofarms:AddButton({
 	Name = "Slapple Farm", Default = false,
 	Callback = function(slapple)
 	  slapples = slapple
-      		while slapples do
+      		while slapple do
 for i, v in ipairs(workspace.Arena.island5.Slapples:GetDescendants()) do
                 if game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and game.Players.LocalPlayer.Character:FindFirstChild("entered") and v.Name == "Glove" and v:FindFirstChildWhichIsA("TouchTransmitter") then
                     firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v, 0)
@@ -511,10 +518,51 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.Arena.Pla
 until game.Players.LocalPlayer.PlayerGui.PlateIndicator.TextLabel.Text == "Plate Counter: 600"
                     end    
                 })
+
 --[[
 Name = <string> - The name of the button.
 Callback = <function> - The function of the button.
 ]]
+--[[
+Name = <string> - The name of the toggle.
+Default = <bool> - The default value of the toggle.
+Callback = <function> - The function of the toggle.
+]]
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
+--[[
+Name = <string> - The name of the toggle.
+Default = <bool> - The default value of the toggle.
+Callback = <function> - The function of the toggle.
+]]
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
+
+
 --[[
 Name = <string> - The name of the toggle.
 Default = <bool> - The default value of the toggle.
@@ -555,41 +603,6 @@ Callback = <function> - The function of the button.
 ]]
 
 
---[[
-Name = <string> - The name of the toggle.
-Default = <bool> - The default value of the toggle.
-Callback = <function> - The function of the toggle.
-]]
 
---[[
-Name = <string> - The name of the button.
-Callback = <function> - The function of the button.
-]]
---[[
-Name = <string> - The name of the toggle.
-Default = <bool> - The default value of the toggle.
-Callback = <function> - The function of the toggle.
-]]
-
---[[
-Name = <string> - The name of the button.
-Callback = <function> - The function of the button.
-]]
---[[
-Name = <string> - The name of the button.
-Callback = <function> - The function of the button.
-]]
---[[
-Name = <string> - The name of the button.
-Callback = <function> - The function of the button.
-]]
-
---[[
-Name = <string> - The name of the button.
-Callback = <function> - The function of the button.
-]]
-
---[[
-Name = <string> - The name of the button.
-Callback = <function> - The function of the button.
-]]
+--END OF THE GUI SCRIPT DO NOT DELETE
+OrionLib:Init()
