@@ -548,13 +548,13 @@ until game.Players.LocalPlayer.PlayerGui.PlateIndicator.TextLabel.Text == "Plate
 oGuis:AddButton({
 	Name = "Glove Abusing Gui (by BreApple)",
 	Callback = function()
-      		loadstring(game:Http('https://raw.githubusercontent.com/BreApple/RobloxUI/main/SBmainGv'))()
+      		loadstring(game:HttpGet('https://raw.githubusercontent.com/BreApple/RobloxUI/main/SBmainGv'))()
   	end    
 })
 oGuis:AddButton({
 	Name = "Slap Battle hub that exist(Might Get A Rejoin) by ionlyusegithubformcmods",
 	Callback = function()
-      		loadstring(game:Http('https://github.com/ionlyusegithubformcmods/1-Line-Scripts/blob/main/Slap%20Battles'))()
+      		loadstring(game:HttpGet('https://github.com/ionlyusegithubformcmods/1-Line-Scripts/blob/main/Slap%20Battles'))()
   	end    
 })
 
