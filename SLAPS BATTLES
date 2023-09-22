@@ -68,6 +68,13 @@ local Helpfuls = Tab3:AddSection({
 local bobBoss = Tab3:AddSection({
 	Name = "Eternal BOB ver"
 })
+local Guis = Tab4:AddSection({
+	Name = "Other Guis"
+})
+
+--[[
+Name = <string> - The name of the section.
+]]
 Tab2:AddToggle({
                     Name = "Anti Ragdoll",
                     Default = false,
@@ -289,7 +296,7 @@ Helpfuls:AddToggle({
 	Callback = function(Value)
 	  Re = Value 
 	  while Re do
-	    wait(6.5)
+	    wait(5.6)
 		game:GetService("ReplicatedStorage"):WaitForChild("ReverseAbility"):FireServer()
 	  end
 	end    
@@ -297,8 +304,25 @@ Helpfuls:AddToggle({
 bobBoss:AddButton({
 	Name = "Auto Hit bob And Minions",
 	Callback = function()
-      		game.ReplicatedStorage.b:FireServer(workspace.bobClone)
-	        game.ReplicatedStorage.b:FireServer(workspace.bobBoss)
+	  --BOSS HITS
+	  while true do 
+	    wait()
+	    workspace:WaitForChild("bobBoss"):WaitForChild("DamageEvent"):FireServer()
+	  end
+	  -- MINIONS HITS
+	  while true do
+  wait()
+  for i,v in pairs(game.Workspace:GetChildren()) do
+    wait()
+    if v.Name == "BobClone" then
+      local args = {
+    [1] = v["Right Arm"]
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("ReaperHit"):FireServer(unpack(args))
+game:GetService("ReplicatedStorage"):WaitForChild("KSHit"):FireServer(unpack(args))
+    end end
+end
   	end    
 })
 Badge:AddButton({
@@ -517,7 +541,28 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.Arena.Pla
 until game.Players.LocalPlayer.PlayerGui.PlateIndicator.TextLabel.Text == "Plate Counter: 600"
                     end    
                 })
+Guis:AddButton({
+	Name = "Glove Abusing Gui (by BreApple)",
+	Callback = function()
+      		loadstring(game:Http('https://raw.githubusercontent.com/BreApple/RobloxUI/main/SBmainGv'))()
+  	end    
+})
+Tab:AddButton({
+	Name = "Slap Battle hub that exist(Might Get A Rejoin) by ionlyusegithubformcmods",
+	Callback = function()
+      		loadstring(game:Http('https://github.com/ionlyusegithubformcmods/1-Line-Scripts/blob/main/Slap%20Battles'))()
+  	end    
+})
 
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
 --[[
 Name = <string> - The name of the button.
 Callback = <function> - The function of the button.
