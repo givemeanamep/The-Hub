@@ -68,9 +68,13 @@ local Helpfuls = Tab3:AddSection({
 local bobBoss = Tab3:AddSection({
 	Name = "Eternal BOB ver"
 })
-local Guis = Tab4:AddSection({
+local oGuis = Tab4:AddSection({
 	Name = "Other Guis"
 })
+local tGuis = Tab4:AddSection({
+	Name = "This Gui"
+})
+
 
 --[[
 Name = <string> - The name of the section.
@@ -267,7 +271,7 @@ end
 end
   
 })
-Tab4:AddButton({
+tGuis:AddButton({
 	Name = "Destroy Gui",
 	Callback = function()
       		OrionLib:Destroy()
@@ -541,112 +545,18 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.Arena.Pla
 until game.Players.LocalPlayer.PlayerGui.PlateIndicator.TextLabel.Text == "Plate Counter: 600"
                     end    
                 })
-Guis:AddButton({
+oGuis:AddButton({
 	Name = "Glove Abusing Gui (by BreApple)",
 	Callback = function()
       		loadstring(game:Http('https://raw.githubusercontent.com/BreApple/RobloxUI/main/SBmainGv'))()
   	end    
 })
-Tab:AddButton({
+oGuis:AddButton({
 	Name = "Slap Battle hub that exist(Might Get A Rejoin) by ionlyusegithubformcmods",
 	Callback = function()
       		loadstring(game:Http('https://github.com/ionlyusegithubformcmods/1-Line-Scripts/blob/main/Slap%20Battles'))()
   	end    
 })
-
---[[
-Name = <string> - The name of the button.
-Callback = <function> - The function of the button.
-]]
-
---[[
-Name = <string> - The name of the button.
-Callback = <function> - The function of the button.
-]]
---[[
-Name = <string> - The name of the button.
-Callback = <function> - The function of the button.
-]]
---[[
-Name = <string> - The name of the toggle.
-Default = <bool> - The default value of the toggle.
-Callback = <function> - The function of the toggle.
-]]
-
---[[
-Name = <string> - The name of the button.
-Callback = <function> - The function of the button.
-]]
---[[
-Name = <string> - The name of the toggle.
-Default = <bool> - The default value of the toggle.
-Callback = <function> - The function of the toggle.
-]]
-
---[[
-Name = <string> - The name of the button.
-Callback = <function> - The function of the button.
-]]
---[[
-Name = <string> - The name of the button.
-Callback = <function> - The function of the button.
-]]
---[[
-Name = <string> - The name of the button.
-Callback = <function> - The function of the button.
-]]
-
---[[
-Name = <string> - The name of the button.
-Callback = <function> - The function of the button.
-]]
-
---[[
-Name = <string> - The name of the button.
-Callback = <function> - The function of the button.
-]]
-
-
---[[
-Name = <string> - The name of the toggle.
-Default = <bool> - The default value of the toggle.
-Callback = <function> - The function of the toggle.
-]]
-
---[[
-Name = <string> - The name of the button.
-Callback = <function> - The function of the button.
-]]
---[[
-Name = <string> - The name of the toggle.
-Default = <bool> - The default value of the toggle.
-Callback = <function> - The function of the toggle.
-]]
-
---[[
-Name = <string> - The name of the button.
-Callback = <function> - The function of the button.
-]]
---[[
-Name = <string> - The name of the button.
-Callback = <function> - The function of the button.
-]]
---[[
-Name = <string> - The name of the button.
-Callback = <function> - The function of the button.
-]]
-
---[[
-Name = <string> - The name of the button.
-Callback = <function> - The function of the button.
-]]
-
---[[
-Name = <string> - The name of the button.
-Callback = <function> - The function of the button.
-]]
-
-
 
 --END OF THE GUI SCRIPT DO NOT DELETE
 OrionLib:Init()
