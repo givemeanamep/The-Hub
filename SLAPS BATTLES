@@ -1,4 +1,5 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+if game.PlaceId == 6403373529 then
 local Window = OrionLib:MakeWindow({Name = "The Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
 wait(.5)
 local loop = false
@@ -45,7 +46,11 @@ local Tab2 = Window:MakeTab({
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
-
+local Tab5 = Window:MakeTab({
+	Name = "Misc",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
 --[[
 Name = <string> - The name of the tab.
 Icon = <string> - The icon of the tab.
@@ -56,6 +61,7 @@ local Tab4 = Window:MakeTab({
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
+
 local Badge = Tab3:AddSection({
 	Name = "Badges Helper"
 })
@@ -318,9 +324,9 @@ bobBoss:AddButton({
   wait()
   for i,v in pairs(game.Workspace:GetChildren()) do
     wait()
-    if v.Name == "BobClone" then
+    if v.Name == "BobClone" and v.FindFirstChild('HumanoidRootPart') then
       local args = {
-    [1] = v["Right Arm"]
+    [1] = v.HumanoidRootPart
 }
 
 game:GetService("ReplicatedStorage"):WaitForChild("ReaperHit"):FireServer(unpack(args))
@@ -557,6 +563,198 @@ oGuis:AddButton({
       		loadstring(game:HttpGet('https://github.com/ionlyusegithubformcmods/1-Line-Scripts/blob/main/Slap%20Battles'))()
   	end    
 })
+Tab5:AddButton({
+	Name = "Died 20 times(gib 20 keels)",
+	Callback = function()
+      		for i = 1, 20 do
+        game:GetService("ReplicatedStorage"):WaitForChild("HumanoidDied"):FireServer(x,false)
+end
+  	end    
+})
+Tab5:AddButton({
+	Name = "Make Retro Obby Visible",
+	Callback = function()
+      		local map = game.ReplicatedStorage.Assets.Retro.Map.RetroObbyMap wait() 
+local cl = map:Clone()
 
---END OF THE GUI SCRIPT DO NOT DELETE
+cl.Parent = workspace
+  	end    
+})
+Tab2:AddToggle({
+	Name = "Anti Rec(if they said smth sussy)",
+	Default = false,
+	Callback = function(Value)
+		    AntiRecord = Value
+	end    
+})
+
+for i,p in pairs(game.Players:GetChildren()) do
+if p ~= game.Players.LocalPlayer then
+p.Chatted:Connect(function(message)
+Words = message:split(" ")
+if AntiRecord == true then
+for i, v in pairs(Words) do
+if v:lower():match("recording") or v:lower():match("rec") or v:lower():match("record") or v:lower():match("discor") or v:lower():match("disco") or v:lower():match("disc") or v:lower():match("ticket") or v:lower():match("tickets") then
+AK:Set(false)
+game.Players.LocalPlayer:Kick("Player Recording Detected.".." ("..p.Name..")")
+end
+end
+end
+end)
+end
+end
+game.Players.PlayerAdded:Connect(function(Player)
+Player.Chatted:Connect(function(message)
+Words = message:split(" ")
+if AntiRecord == true then
+for i, p in pairs(Words) do
+if v:lower():match("recording") or v:lower():match("rec") or v:lower():match("record") or v:lower():match("disco") or v:lower():match("disc")  then
+AntiKick = false
+game.Players.LocalPlayer:Kick("Player Recording Detected.".." ("..Player.Name..")")
+end
+end
+end
+end)
+end)
+
+Tab2:AddToggle({
+	Name = "Anti Cube Of Death",
+	Default = false,
+	Callback = function(Value)
+		if Value == true then
+        workspace.Arena.CubeOfDeathArea["the cube of death(i heard it kills)"].CanTouch = false
+        else
+                workspace.Arena.CubeOfDeathArea["the cube of death(i heard it kills)"].CanTouch = true
+        end
+	end    
+})
+Tab2:AddToggle({
+	Name = "Anti DeathBarrier",
+	Default = false,
+	Callback = function(Value)
+		if Value == true then
+for i,v in pairs(game.Workspace.DEATHBARRIER:GetChildren()) do
+                    if v.ClassName == "Part" and v.Name == "BLOCK" then
+                        v.CanTouch = false
+                    end
+                end
+workspace.DEATHBARRIER.CanTouch = false
+workspace.DEATHBARRIER2.CanTouch = false
+workspace.dedBarrier.CanTouch = false
+workspace.ArenaBarrier.CanTouch = false
+workspace.AntiDefaultArena.CanTouch = false
+else
+for i,v in pairs(game.Workspace.DEATHBARRIER:GetChildren()) do
+                    if v.ClassName == "Part" and v.Name == "BLOCK" then
+                        v.CanTouch = true
+                    end
+                end
+workspace.DEATHBARRIER.CanTouch = true
+workspace.DEATHBARRIER2.CanTouch = true
+workspace.dedBarrier.CanTouch = true
+workspace.ArenaBarrier.CanTouch = true
+workspace.AntiDefaultArena.CanTouch = true
+end
+	end    
+})
+Tab5:AddToggle({
+	Name = "Auto Farm KS(It's u help em)",
+	Default = false,
+	Callback = function(Value)
+	    KSHelp = Value	
+	  
+	  if KSHelp == true then
+	    
+	    
+	    local char = game.Players.LocalPlayer.Character
+  while true do wait()
+    char.Ragdolled.Changed:Connect(function()
+      if char.Ragdolled.Value == true then
+      local args = {
+    [1] = char ,
+    [2] = false
+}
+      game:GetService("ReplicatedStorage"):WaitForChild("HumanoidDied"):FireServer(unpack(args))   
+        wsit(1)
+    end 
+    end)
+  end
+	  end
+	  
+	end    
+})
+Helpfuls:AddToggle({
+	Name = "FE Invisible(use on lobby)",
+	Default = false,
+	Callback = function(Value)
+		FEinvis = Value
+	  if FEinvis == true then
+	    local Cglove = game.Players.LocalPlayer.leaderstats.Glove.Value
+	    if Cglove ~= "Ghost" then
+	      fireclickdetector(game.Workspace.Lobby.Ghost.ClickDetector)
+	      wait(.5)
+	      game:GetService("ReplicatedStorage"):WaitForChild("Ghostinvisibilityactivated"):FireServer()
+	      wait(.5)
+	      fireclickdetector(game.Workspace.Lobby[Cglove].ClickDetector)
+	      else 
+	      game:GetService("ReplicatedStorage"):WaitForChild("Ghostinvisibilityactivated"):FireServer()
+	      wait(.5)
+	    end
+	end    
+	end
+})
+Helpfuls:AddDropdown({
+	Name = "Teleport Player",
+	Default = "",
+	Options = {"Safe spot", "Arena",  "Default Arena", "Tournament", "Moai Island", "Slapple Island", "Plate"},
+	Callback = function(Value)
+if Value == "Safe spot" then
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.Spot.CFrame * CFrame.new(0,40,0)
+elseif Value == "Arena" then
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.workspace.Origo.CFrame * CFrame.new(0,-5,0)
+elseif Value == "Moai Island" then
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(215, -15.5, 0.5)
+elseif Value == "Slapple Island" then
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.workspace.Arena.island5.Union.CFrame * CFrame.new(0,3.25,0)
+elseif Value == "Plate" then
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.Arena.Plate.CFrame * CFrame.new(0,2,0)
+elseif Value == "Tournament" then
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.Battlearena.Arena.CFrame * CFrame.new(0,10,0)
+elseif Value == "Default Arena" then
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(120,360,-3)
+end
+	end    
+})
+end
+  
+  
+  -- ONNNNNN UPPPPPPDATINNGGGGGGGGGG BOISSSSSSSDSSS
+  
+  --[[
+  if game.PlaceId == 13833961666 then
+    local Window = OrionLib:MakeWindow({Name = "The Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+wait(.5)
+local Tab1 = Window:MakeTab({
+	Name = "Combat",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+Tab:AddToggle({
+	Name = "This is a toggle!",
+	Default = false,
+	Callback = function(Value)
+		if Value == true then
+		  
+		end
+	end    
+})
+]]
+  
+  
+--[[
+Name = <string> - The name of the toggle.
+Default = <bool> - The default value of the toggle.
+Callback = <function> - The function of the toggle.
+]]
+
 OrionLib:Init()
