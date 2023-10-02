@@ -14,13 +14,21 @@ TournamentAntiVoid.Anchored = true
 	  
 	  local antivoid = Instance.new('Part')
 	  antivoid.Position = Vector3.new(-9.55 , -12.87 , 1.84)
-	  antivoid.Size = Vector3.new(10000,1,10000)
+	  antivoid.Size = Vector3.new(999999999999999,1,99999999999999999)
 	  antivoid.Anchored = true
 	  antivoid.Parent = workspace
 	  antivoid.Transparency = 1
    antivoid.CanCollide = true
 antivoid.Name = 'aVoid'
 	  
+  local Spot = Instance.new('Part')
+	  Spot.Position = Vector3.new(-30000, 2600, -100000)
+	  Spot.Size = Vector3.new(999,1,999)
+	  Spot.Anchored = true
+	  Spot.Parent = workspace
+	  Spot.Transparency = 0.7
+   Spot.CanCollide = true
+  Spot.Name = 'SafeSpot'
 
 local Tab1 = Window:MakeTab({
 	Name = "Combat",
@@ -558,16 +566,16 @@ oGuis:AddButton({
   	end    
 })
 oGuis:AddButton({
-	Name = "Slap Battle hub that exist(Might Get A Rejoin) by ionlyusegithubformcmods",
+	Name = "Slap Battle hub that exist (Might Get A Rejoin) by ionlyusegithubformcmods",
 	Callback = function()
       		loadstring(game:HttpGet('https://github.com/ionlyusegithubformcmods/1-Line-Scripts/blob/main/Slap%20Battles'))()
   	end    
 })
 Tab5:AddButton({
-	Name = "Died 20 times(gib 20 keels)",
+	Name = "Die 20 Times (Give Reaper 20 keels)",
 	Callback = function()
       		for i = 1, 20 do
-        game:GetService("ReplicatedStorage"):WaitForChild("HumanoidDied"):FireServer(x,false)
+        game:GetService("ReplicatedStorage"):WaitForChild("HumanoidDied"):FireServer(game.Players.LocaPlayer.Character,false)
 end
   	end    
 })
@@ -581,7 +589,7 @@ cl.Parent = workspace
   	end    
 })
 Tab2:AddToggle({
-	Name = "Anti Rec(if they said smth sussy)",
+	Name = "Anti Record (If They Said Something Sussy)",
 	Default = false,
 	Callback = function(Value)
 		    AntiRecord = Value
@@ -594,7 +602,7 @@ p.Chatted:Connect(function(message)
 Words = message:split(" ")
 if AntiRecord == true then
 for i, v in pairs(Words) do
-if v:lower():match("recording") or v:lower():match("rec") or v:lower():match("record") or v:lower():match("discor") or v:lower():match("disco") or v:lower():match("disc") or v:lower():match("ticket") or v:lower():match("tickets") then
+if v:lower():match("recording") or v:lower():match("rec") or v:lower():match("record") or v:lower():match("discor") or v:lower():match("disco") or v:lower():match("disc") or v:lower():match("ticket") or v:lower():match("tickets") or v:lower():match("hack") or v:lower():match("hacker") or v:lower():match("hacks") then
 AK:Set(false)
 game.Players.LocalPlayer:Kick("Player Recording Detected.".." ("..p.Name..")")
 end
@@ -617,6 +625,7 @@ end
 end)
 end)
 
+  
 Tab2:AddToggle({
 	Name = "Anti Cube Of Death",
 	Default = false,
@@ -629,7 +638,7 @@ Tab2:AddToggle({
 	end    
 })
 Tab2:AddToggle({
-	Name = "Anti DeathBarrier",
+	Name = "Anti Deathbarrier",
 	Default = false,
 	Callback = function(Value)
 		if Value == true then
@@ -675,7 +684,7 @@ Tab5:AddToggle({
     [2] = false
 }
       game:GetService("ReplicatedStorage"):WaitForChild("HumanoidDied"):FireServer(unpack(args))   
-        wsit(1)
+        wait(1)
     end 
     end)
   end
@@ -683,12 +692,11 @@ Tab5:AddToggle({
 	  
 	end    
 })
-Helpfuls:AddToggle({
+Helpfuls:AddButton({
 	Name = "FE Invisible(use on lobby)",
-	Default = false,
-	Callback = function(Value)
-		FEinvis = Value
-	  if FEinvis == true then
+ 	Callback = function()
+	  
+	  
 	    local Cglove = game.Players.LocalPlayer.leaderstats.Glove.Value
 	    if Cglove ~= "Ghost" then
 	      fireclickdetector(game.Workspace.Lobby.Ghost.ClickDetector)
@@ -701,15 +709,15 @@ Helpfuls:AddToggle({
 	      wait(.5)
 	    end
 	end    
-	end
+	
 })
 Helpfuls:AddDropdown({
-	Name = "Teleport Player",
+	Name = "Teleports To",
 	Default = "",
 	Options = {"Safe spot", "Arena",  "Default Arena", "Tournament", "Moai Island", "Slapple Island", "Plate"},
 	Callback = function(Value)
 if Value == "Safe spot" then
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.Spot.CFrame * CFrame.new(0,40,0)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace["SafeSpot"].CFrame * CFrame.new(0,40,0)
 elseif Value == "Arena" then
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.workspace.Origo.CFrame * CFrame.new(0,-5,0)
 elseif Value == "Moai Island" then
@@ -725,6 +733,19 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(120,360,
 end
 	end    
 })
+  oGuis:AddButton({
+	Name = "Fly Gui v3(not mine)",
+	Callback = function()
+	  loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/FlyGuiV3.txt"))()  	
+	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
+  
+  --END OF THIS GUI
 end
   
   
