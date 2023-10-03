@@ -666,17 +666,18 @@ workspace.AntiDefaultArena.CanTouch = true
 end
 	end    
 })
-Tab5:AddToggle({
+Tab5:AddTextbox({
 	Name = "Auto Farm KS(It's u help em)",
-	Default = false,
+	Default = "Plr Name Here",
+  TextDisappear = true,
 	Callback = function(Value)
-	    KSHelp = Value	
+	    KSHelp = Value
 	  
-	  if KSHelp == true then
-	    
-	    
 	    local char = game.Players.LocalPlayer.Character
   while true do wait()
+     if char ~= nil then
+      char.HumanoidRootPart.CFrame = workspace[Value].HumanoidRootPart.CFrame * CFrame.new(0,0,-5)
+      
     char.Ragdolled.Changed:Connect(function()
       if char.Ragdolled.Value == true then
       local args = {
@@ -688,15 +689,13 @@ Tab5:AddToggle({
     end 
     end)
   end
-	  end
-	  
 	end    
+	end
 })
 Helpfuls:AddButton({
 	Name = "FE Invisible(use on lobby)",
  	Callback = function()
-	  
-	  
+	  if game.Players.LocalPlayer.Character.isInArena.Value == false then
 	    local Cglove = game.Players.LocalPlayer.leaderstats.Glove.Value
 	    if Cglove ~= "Ghost" then
 	      fireclickdetector(game.Workspace.Lobby.Ghost.ClickDetector)
@@ -704,12 +703,14 @@ Helpfuls:AddButton({
 	      game:GetService("ReplicatedStorage"):WaitForChild("Ghostinvisibilityactivated"):FireServer()
 	      wait(.5)
 	      fireclickdetector(game.Workspace.Lobby[Cglove].ClickDetector)
-	      else 
+	      else
 	      game:GetService("ReplicatedStorage"):WaitForChild("Ghostinvisibilityactivated"):FireServer()
 	      wait(.5)
 	    end
+	    else 
+	    game.StarterGui:SetCore("SendNotification", {Title = "What Did I Just Tell You", Duration = 5,Text = "You Must Be In The Arena Or You'll Be kicked Out"})
 	end    
-	
+ 	end
 })
 Helpfuls:AddDropdown({
 	Name = "Teleports To",
@@ -750,8 +751,7 @@ end
   
   
   -- ONNNNNN UPPPPPPDATINNGGGGGGGGGG BOISSSSSSSDSSS
-  
-  --[[
+
   if game.PlaceId == 13833961666 then
     local Window = OrionLib:MakeWindow({Name = "The Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
 wait(.5)
@@ -760,15 +760,93 @@ local Tab1 = Window:MakeTab({
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
-Tab:AddToggle({
-	Name = "This is a toggle!",
+    local Tab2 = Window:MakeTab({
+	Name = "Main Stuffs",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+--[[
+Name = <string> - The name of the tab.
+Icon = <string> - The icon of the tab.
+PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
+]]
+Tab2:AddToggle({
+	Name = "Tycoon Auto Click",
 	Default = false,
 	Callback = function(Value)
 		if Value == true then
-		  
+		  for i,v in pairs(workspace:GetDescendants()) do
+        if v.Name == "End" and v.ClassName == "Part" then
+            v.Size = Vector3.new(28, 0.3, 4)
+        end
+    end
+while atycoon == true do
+    for i,v in pairs(workspace:GetDescendants()) do
+        if v.Name == "Click" and v:FindFirstChild("ClickDetector") then
+            fireclickdetector(v.ClickDetector)
+        end
+    end
+    task.wait()
 		end
 	end    
+	end
 })
+Tab1:AddToggle({
+	Name = "AutoHit Bob",
+	Default = false,
+	Callback = function(Value)
+		if Value == true then 
+		  while true do
+		    wait()
+		    workspace:WaitForChild("bobBoss"):WaitForChild("DamageEvent"):FireServer()
+workspace:WaitForChild("bobBoss"):WaitForChild("DamageEvent"):FireServer()
+workspace:WaitForChild("bobBoss"):WaitForChild("DamageEvent"):FireServer()
+
+	end    end end
+})
+    
+Tab1:AddToggle({
+	Name = "AutoHit Bob Minions(use KS or Reaper)",
+	Default = false,
+	Callback = function(Value)
+		if Value == true then 
+		  while true do
+		    wait()
+		    for i,v in pairs(game.Workspace:GetChildren()) do if v.Name == "BobClone" then local args = {
+    [1] = v:WaitForChild("HumanoidRootPart")
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("ReaperHit"):FireServer(unpack(args))
+		      game:GetService("ReplicatedStorage"):WaitForChild("KSHit"):FireServer(unpack(args))
+end end end
+	end    end
+})
+    Tab:AddButton({
+	Name = "Anti Lag",
+	Callback = function()
+	  loadstring(game:HttpGet("https://raw.githubusercontent.com/givemeanamep/The-Hub/main/AntiLag%20not%20mine"))()
+      		  	end    
+})
+Tab2:AddButton({
+	Name = "Fly Gui v3",
+	Callback = function()
+      		 loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/FlyGuiV3.txt"))()  	
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
+--[[
+Name = <string> - The name of the toggle.
+Default = <bool> - The default value of the toggle.
+Callback = <function> - The function of the toggle.
 ]]
   
   
@@ -777,5 +855,5 @@ Name = <string> - The name of the toggle.
 Default = <bool> - The default value of the toggle.
 Callback = <function> - The function of the toggle.
 ]]
-
+  end
 OrionLib:Init()
